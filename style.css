@@ -1,0 +1,119 @@
+:root {
+    --utama: #38B6FF;
+    --utama2: #30A5DF;
+    --second: #258DFF;
+    --second2: #024DA9;
+    --emas: #ffffff;
+    --emas-gelap: #FF8C00;
+    --pendukung: #FFFFFF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Background dipergelap agar neon dan partikel sangat menonjol */
+    background: radial-gradient(circle at 50% 50%, #0a2342 0%, #000814 100%);
+    color: var(--pendukung);
+    min-height: 100vh; overflow: hidden; position: relative; 
+    display: flex; justify-content: center; align-items: center;
+}
+
+/* Background Partikel Library */
+#particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+
+/* Tata Letak Sponsor & Karakter */
+.sponsor-left { position: absolute; top: 30px; left: 30px; display: flex; gap: 15px; z-index: 5; }
+.sponsor-right { position: absolute; top: 30px; right: 30px; display: flex; gap: 15px; z-index: 5; }
+.sponsor-left img, .sponsor-right img { height: 70px; object-fit: contain; filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4)); }
+
+.character { position: absolute; bottom: -20px; height: 85vh; max-width: 48vw; object-fit: contain; z-index: 2; filter: drop-shadow(10px 10px 25px rgba(0,0,0,0.8)); }
+.char-kiri { left: 20px; animation: floatAnim 6s ease-in-out infinite; }
+.char-kanan { right: 20px; animation: floatAnim 6s ease-in-out infinite 3s; }
+@keyframes floatAnim { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+/* Area Utama */
+.main-content { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 800px; }
+.logo-utama { height: 160px; margin-bottom: 20px; filter: drop-shadow(0px 8px 15px rgba(0,0,0,0.8)); }
+.header h1 { font-size: 2.8rem; color: var(--pendukung); text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px var(--utama), 0 0 30px var(--utama2); margin-bottom: 30px; }
+
+/* ==================================================
+   BOX GACHA: GLASSMORPHISM & PARALLAX READY 
+   ================================================== */
+.gacha-container {
+    position: relative; width: 90%; max-width: 600px; height: 180px; 
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px; overflow: hidden; margin-bottom: 40px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255,255,255,0.1);
+    /* 3D Property */
+    transform-style: preserve-3d;
+    transition: box-shadow 0.3s ease, border 0.3s ease;
+}
+
+/* Kotak Gacha Menyala Emas Saat Putaran */
+.gacha-container.tension-mode { border: 2px solid var(--emas); animation: tensionGlow 0.4s infinite alternate; }
+@keyframes tensionGlow {
+    from { box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 20px var(--emas), inset 0 0 15px var(--emas); }
+    to { box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 60px var(--emas-gelap), inset 0 0 30px var(--emas-gelap); }
+}
+
+.gacha-track { display: flex; flex-direction: column; width: 100%; }
+
+/* Teks Nama Peserta dalam Box Kaca */
+.name-item { 
+    height: 60px; line-height: 60px; text-align: center; font-size: 2.2rem; font-weight: 900; 
+    color: var(--emas); /* Warna Emas agar elegan di atas kaca buram */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 20px; 
+}
+
+/* Kaca Penyorot di Tengah Slot */
+.highlight-bar { 
+    position: absolute; top: 60px; left: 0; width: 100%; height: 60px; 
+    background: linear-gradient(90deg, rgba(56,182,255,0) 0%, rgba(56,182,255,0.3) 50%, rgba(56,182,255,0) 100%);
+    border-top: 2px solid var(--utama); border-bottom: 2px solid var(--utama); 
+    box-shadow: 0 0 20px rgba(56, 182, 255, 0.8); pointer-events: none; z-index: 2; 
+}
+
+/* Tombol Spin */
+button {
+    background: linear-gradient(to bottom, var(--utama), var(--utama2));
+    color: var(--pendukung); font-size: 1.8rem; font-weight: 900; padding: 20px 70px; border: none; border-radius: 50px;
+    cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 3px 5px rgba(255,255,255,0.5);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-transform: uppercase; letter-spacing: 2px;
+}
+button:hover:not(:disabled) { transform: scale(1.05) translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 30px var(--utama); }
+button:active:not(:disabled) { transform: scale(0.95); }
+button:disabled { background: #555; color: #888; cursor: not-allowed; box-shadow: none; transform: none; }
+
+/* Popup Pemenang */
+.winner-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.95) 100%);
+    backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; perspective: 1200px;
+}
+.winner-overlay.show { opacity: 1; pointer-events: auto; }
+
+.winner-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(20px);
+    padding: 60px 100px; border-radius: 30px; box-shadow: 0 30px 80px rgba(0,0,0,0.8), 0 0 50px var(--utama);
+    text-align: center; transform: translateY(150px) scale(0.7) rotateX(30deg); opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s ease; transform-style: preserve-3d;
+}
+.winner-overlay.show .winner-card { transform: translateY(0) scale(1) rotateX(0deg); opacity: 1; }
+
+.winner-card p { font-size: 1.8rem; color: var(--emas); margin-bottom: 20px; font-weight: 900; letter-spacing: 3px; text-shadow: 0 0 10px var(--emas-gelap); }
+
+.winner-card h2 { 
+    font-size: 4.5rem; color: var(--pendukung); margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px var(--utama), 0 0 80px var(--utama2), 0 0 120px var(--second2);
+    animation: neonPulsate 1.5s infinite alternate;
+}
+@keyframes neonPulsate { 100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--utama), 0 0 40px var(--utama2), 0 0 80px var(--second2); } }
+
+#closePopupBtn { font-size: 1.2rem; padding: 15px 50px; background: rgba(255,255,255,0.2); border: 2px solid var(--pendukung); border-radius: 50px; color: var(--pendukung); cursor:pointer; }
+#closePopupBtn:hover { background: var(--pendukung); color: var(--second2); box-shadow: 0 0 20px var(--pendukung); }

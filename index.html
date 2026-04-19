@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha Grand Prize - TCR</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="spinAudio" src="assets/spin.mp3" loop></audio>
+    <audio id="winAudio" src="https://raw.githubusercontent.com/DzarelDeveloper/Img/main/win.mp3"></audio>
+
+    <div id="particles-js"></div>
+
+    <div class="sponsor-left">
+        <img src="assets/LogoPangkalanTNIALTegal.png" alt="Lanal Tegal">
+        <img src="assets/LogoTCRANNIV2.png" alt="TCR Anniv 2">
+    </div>
+    
+    <div class="sponsor-right">
+        <img src="assets/LogoKotaTegal.png" alt="Kota Tegal">
+        <img src="assets/LogoTahunKotaTegal.png" alt="HUT Kota Tegal">
+        <img src="assets/LogoDirgahayuLanalTegal.PNG" alt="Dirgahayu Lanal">
+    </div>
+
+    <img class="character char-kiri" src="assets/CharacterKiri.png" alt="Karakter Kiri">
+    <img class="character char-kanan" src="assets/CharacterKanan.png" alt="Karakter Kanan">
+
+    <div class="main-content">
+        <img class="logo-utama" src="assets/LogoUtamaTCR.png" alt="Logo Utama TCR">
+
+        <div class="header">
+            <h1>DOORPRIZE POOL</h1>
+        </div>
+
+        <div class="gacha-container" id="gachaBox">
+            <div class="highlight-bar"></div>
+            <div class="gacha-track" id="track">
+                <div class="name-item" style="color:white; text-shadow: 2px 2px 5px black;">Memuat Data...</div>
+            </div>
+        </div>
+
+        <button id="spinBtn" disabled>Loading...</button>
+    </div>
+
+    <div class="winner-overlay" id="winnerOverlay">
+        <div class="winner-card" id="winnerCard">
+            <p>SELAMAT KEPADA PEMENANG</p>
+            <h2 id="winnerName">-</h2>
+            <button id="closePopupBtn">NEXT SPIN</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
